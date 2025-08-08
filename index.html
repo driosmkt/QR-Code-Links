@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-Code Links</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>QR-Code Links</h1>
+            <p>Gere URLs rastreáveis e QR Codes para suas campanhas em pontos físicos.</p>
+        </header>
+
+        <main>
+            <div class="input-container">
+                <input type="url" id="destinationUrl" placeholder="1. Cole o link de destino aqui">
+                <input type="text" id="location" placeholder="2. Digite o local do QR Code (ex: Praça do Bambu)">
+                <input type="text" id="campaignName" placeholder="3. Digite o nome da campanha (ex: Campanha IPTU)">
+                <button id="generateBtn">Gerar QR Code</button>
+            </div>
+
+            <!-- A ÁREA DE RESULTADO QUE APARECE APÓS GERAR -->
+            <div id="resultBox" class="hidden">
+                <h3>Seu Link e QR Code Estão Prontos!</h3>
+                <div class="result-content">
+                    <div id="qrCodeCanvas"></div>
+                    <div class="result-details">
+                        <p><strong>Link Rastrável:</strong></p>
+                        <span id="generatedLink"></span>
+                        <div class="button-group">
+                            <button id="copyBtn" class="result-btn">Copiar Link</button>
+                            <button id="downloadBtn" class="result-btn primary">Baixar QR Code</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-credits">
+            <span>Núcleo Digital da Secretaria de Comunicação:</span>
+            <p>Raphael Rosendo e Douglas Rios</p>
+        </div>
+        <p class="footer-copyright">© 2025 Prefeitura de Petrolina – Secretaria de Comunicação</p>
+    </footer>
+
+    <!-- Biblioteca para gerar QR Code -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <!-- Nosso script customizado -->
+    <script src="script.js"></script>
+</body>
+</html>
