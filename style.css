@@ -1,19 +1,30 @@
 :root {
-    --primary-color: #FFC107;
-    --secondary-color: #2a2a38;
-    --dark-color: #1c1c24;
-    --light-color: #F8F9FA;
+    /* Novas cores da marca */
+    --primary-color: #0047BB;   /* Azul da logo */
+    --secondary-color: #FFC107; /* Amarelo da logo */
+    
+    /* Cores de suporte para o tema claro */
+    --dark-text: #212529;      /* Texto principal escuro */
+    --light-bg: #FFFFFF;      /* Fundo principal branco */
+    --gray-bg: #f8f9fa;       /* Fundo de containers cinza claro */
+    --border-color: #dee2e6;  /* Cor das bordas */
     --font-family: 'Poppins', sans-serif;
 }
 
 body {
     font-family: var(--font-family);
-    background-color: var(--dark-color);
-    color: var(--light-color);
+    background-color: var(--light-bg);
+    color: var(--dark-text);
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+.top-bar {
+    height: 5px;
+    width: 100%;
+    background-color: var(--primary-color);
 }
 
 .container {
@@ -23,21 +34,15 @@ body {
     flex-grow: 1; 
 }
 
-/* --- ESTILO DO TÍTULO NO TOPO --- */
-.project-title {
+.header-logo-container {
     text-align: center;
-    padding-bottom: 1.5rem;
     margin-bottom: 2rem;
-    border-bottom: 1px solid #444;
+    padding-top: 1.5rem;
 }
 
-.project-title h2 {
-    margin: 0;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--light-color);
+.header-logo {
+    max-width: 250px;
 }
-
 
 header {
     text-align: center;
@@ -48,6 +53,10 @@ header h1 {
     color: var(--primary-color);
     margin: 0;
     font-size: 1.8rem;
+}
+
+header p {
+    color: #6c757d;
 }
 
 .input-container {
@@ -62,23 +71,22 @@ input[type="url"], input[type="text"], select {
     padding: 0.8rem;
     font-size: 1rem;
     font-family: var(--font-family);
-    background-color: var(--secondary-color);
-    border: 1px solid #444;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
-    color: var(--light-color);
+    color: var(--dark-text);
     box-sizing: border-box;
 }
 
-select option[disabled] {
-    color: #888;
-}
+input::placeholder { color: #6c757d; }
+select option[disabled] { color: #6c757d; }
 
 button {
     padding: 0.9rem;
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: var(--primary-color);
-    color: var(--dark-color);
+    background-color: var(--secondary-color);
+    color: var(--dark-text);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -86,7 +94,7 @@ button {
 }
 
 button:hover {
-    background-color: #ffda4a;
+    filter: brightness(1.05);
 }
 
 #resultsContainer {
@@ -99,9 +107,10 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--secondary-color);
+    background-color: var(--gray-bg);
     padding: 1rem;
     border-radius: 6px;
+    border: 1px solid var(--border-color);
     gap: 1rem;
 }
 
@@ -116,43 +125,41 @@ button:hover {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    background-color: var(--dark-color);
+    background-color: #e9ecef;
     padding: 0.5rem;
     border-radius: 4px;
     font-size: 0.9rem;
-    color: #ccc;
+    color: #495057;
 }
 
 .copy-btn {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
 }
 
 .copy-btn.copied {
-    background-color: #007bff;
+    background-color: #28a745;
 }
 
-/* --- ESTILOS DO RODAPÉ ATUALIZADOS --- */
+/* --- ESTILOS DO RODAPÉ --- */
 footer {
     width: 100%;
-    background-color: var(--secondary-color);
+    background-color: var(--gray-bg);
     text-align: center;
     padding: 2.5rem 0;
     margin-top: 3rem;
-    border-top: 1px solid #444;
+    border-top: 1px solid var(--border-color);
 }
 
-.footer-project-name {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--primary-color);
+.footer-logo {
+    max-width: 180px;
     margin-bottom: 1.5rem;
 }
 
 .footer-credits {
-    color: #ccc;
+    color: #495057;
     line-height: 1.2;
     margin-bottom: 2rem;
 }
@@ -160,7 +167,7 @@ footer {
 .footer-credits span {
     display: block;
     font-size: 1rem;
-    color: #aaa;
+    color: #6c757d;
     margin-bottom: 0.5rem;
 }
 
@@ -168,11 +175,11 @@ footer {
     margin: 0;
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--light-color);
+    color: var(--dark-text);
 }
 
 .footer-copyright {
-    color: #888;
+    color: #6c757d;
     font-size: 0.9rem;
     margin: 0;
 }
