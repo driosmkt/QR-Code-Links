@@ -3,46 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR-Code Links</title>
+    <title>Simão na Rede Digital - Gerador de Links</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="top-bar"></div>
+
     <div class="container">
+        <div class="header-logo-container">
+            <img src="logo.png" alt="Logo Simão na Rede Digital" class="header-logo">
+        </div>
+
         <header>
-            <h1>QR-Code Links</h1>
-            <p>Gere URLs rastreáveis e QR Codes para suas campanhas em pontos físicos.</p>
+            <h1>Gerador de Link Secretarias</h1>
+            <p>Uma ferramenta para criar links rastreáveis de forma rápida e padronizada para todas as secretarias.</p>
         </header>
 
         <main>
             <div class="input-container">
-                <input type="url" id="destinationUrl" placeholder="1. Cole o link de destino aqui">
-                <input type="text" id="location" placeholder="2. Digite o local do QR Code (ex: Praça do Bambu)">
-                <input type="text" id="campaignName" placeholder="3. Digite o nome da campanha (ex: Campanha IPTU)">
-                <button id="generateBtn">Gerar QR Code</button>
+                <input type="url" id="baseUrl" placeholder="1. Cole o link do post ou matéria aqui">
+                <input type="text" id="campaignName" placeholder="2. Digite o nome da campanha (ex: Inauguração da UPA)">
+                <select id="contentType">
+                    <option value="" disabled selected>3. Escolha o formato do conteúdo</option>
+                    <option value="reels">Reels</option>
+                    <option value="post_estatico">Post Estático</option>
+                    <option value="carrossel">Carrossel</option>
+                    <option value="stories">Stories</option>
+                </select>
+                <button id="generateBtn">Gerar Links</button>
             </div>
 
-            <!-- A ÁREA DE RESULTADO QUE APARECE APÓS GERAR -->
-            <div id="resultBox" class="hidden">
-                <h3>Seu Link e QR Code Estão Prontos!</h3>
-                <div class="result-content">
-                    <div id="qrCodeCanvas"></div>
-                    <div class="result-details">
-                        <p><strong>Link Rastrável:</strong></p>
-                        <span id="generatedLink"></span>
-                        <div class="button-group">
-                            <button id="copyBtn" class="result-btn">Copiar Link</button>
-                            <button id="downloadBtn" class="result-btn primary">Baixar QR Code</button>
-                        </div>
-                    </div>
-                </div>
+            <div id="resultsContainer">
+                <!-- Os links gerados aparecerão aqui -->
             </div>
         </main>
     </div>
 
+    <!-- RODAPÉ ATUALIZADO -->
     <footer>
+        <img src="logo.png" alt="Logo Simão na Rede Digital" class="footer-logo">
         <div class="footer-credits">
             <span>Núcleo Digital da Secretaria de Comunicação:</span>
             <p>Raphael Rosendo e Douglas Rios</p>
@@ -50,9 +52,6 @@
         <p class="footer-copyright">© 2025 Prefeitura de Petrolina – Secretaria de Comunicação</p>
     </footer>
 
-    <!-- Biblioteca para gerar QR Code -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <!-- Nosso script customizado -->
     <script src="script.js"></script>
 </body>
 </html>
