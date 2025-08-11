@@ -64,7 +64,6 @@ button:hover {
     background-color: #ffda4a;
 }
 
-/* --- ESTILOS DA CAIXA DE RESULTADO --- */
 #resultBox {
     background-color: var(--secondary-color);
     padding: 2rem;
@@ -92,6 +91,14 @@ button:hover {
     display: inline-block;
 }
 
+/* --- NOVA REGRA CSS ADICIONADA AQUI --- */
+/* Controla o tamanho de exibição do QR Code na tela, sem afetar a qualidade do download */
+#qrCodeCanvas canvas {
+    width: 200px !important;
+    height: 200px !important;
+}
+
+
 .result-details {
     flex-grow: 1;
 }
@@ -103,7 +110,7 @@ button:hover {
     border-radius: 4px;
     font-size: 0.9rem;
     color: #ccc;
-    word-break: break-all; /* Quebra o link se for muito longo */
+    word-break: break-all;
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
 }
@@ -136,8 +143,6 @@ button:hover {
     color: var(--dark-color);
 }
 
-
-/* --- RODAPÉ --- */
 footer {
     text-align: center;
     padding: 2.5rem 0;
