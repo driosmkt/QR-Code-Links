@@ -19,31 +19,25 @@ const copyBtn = document.getElementById('copyBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const historySection = document.getElementById('historySection');
 const historyList = document.getElementById('historyList');
+const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 
 let qrCodeInstance = null;
 let history = JSON.parse(localStorage.getItem('qrCodeHistory')) || [];
 
 // --- GERENCIAMENTO DE ESTADO E LÓGICA ---
 
-// Mostra/esconde o campo de URL manual
 destinationSelect.addEventListener('change', () => {
-    if (destinationSelect.value === 'manual') {
-        manualUrlInput.classList.remove('hidden');
-    } else {
-        manualUrlInput.classList.add('hidden');
-    }
+    manualUrlInput.classList.toggle('hidden', destinationSelect.value !== 'manual');
 });
 
-// FUNÇÃO PRINCIPAL
 function generateQRCode(data) {
     let destinationUrl, location, campaignName;
 
-    // Se 'data' for fornecido, estamos recarregando do histórico
     if (data) {
         destinationUrl = data.destination;
         location = data.location;
         campaignName = data.campaign;
-    } else { // Senão, pegamos dos campos de input
+    } else {
         const selectedDestination = destinationSelect.value;
         destinationUrl = selectedDestination === 'manual' ? manualUrlInput.value.trim() : selectedDestination;
         location = locationInput.value.trim();
@@ -53,14 +47,10 @@ function generateQRCode(data) {
             alert('Por favor, preencha todos os campos.');
             return;
         }
-        // Salva no histórico apenas se for uma nova geração
         saveToHistory({ destination: destinationUrl, location, campaign: campaignName });
     }
     
-    // Constrói a URL rastreável
     const trackableUrl = buildTrackableUrl(destinationUrl, location, campaignName);
-    
-    // Exibe os resultados
     displayResults(trackableUrl);
 }
 
@@ -86,15 +76,11 @@ function displayResults(url) {
     resultBox.classList.remove('hidden');
 }
 
-
 // --- GERENCIAMENTO DO HISTÓRICO ---
 
 function saveToHistory(entry) {
-    // Adiciona a nova entrada no início do array
     history.unshift(entry);
-    // Limita o histórico aos últimos 5 itens
-    history = history.slice(0, 5);
-    // Salva no localStorage do navegador
+    history = history.slice(0, 10); // Aumentei o limite para 10
     localStorage.setItem('qrCodeHistory', JSON.stringify(history));
     renderHistory();
 }
@@ -125,11 +111,20 @@ function renderHistory() {
 }
 
 function deleteFromHistory(index) {
-    history.splice(index, 1);
-    localStorage.setItem('qrCodeHistory', JSON.stringify(history));
-    renderHistory();
+    if (confirm(`Tem certeza que deseja excluir a campanha "${history[index].campaign}" do histórico?`)) {
+        history.splice(index, 1);
+        localStorage.setItem('qrCodeHistory', JSON.stringify(history));
+        renderHistory();
+    }
 }
 
+function clearAllHistory() {
+    if (confirm('Tem certeza que deseja apagar TODO o histórico de campanhas? Esta ação não pode ser desfeita.')) {
+        history = [];
+        localStorage.removeItem('qrCodeHistory');
+        renderHistory();
+    }
+}
 
 // --- EVENT LISTENERS ---
 
@@ -139,10 +134,7 @@ copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(generatedLinkSpan.textContent).then(() => {
         copyBtn.textContent = 'Copiado!';
         copyBtn.classList.add('copied');
-        setTimeout(() => {
-            copyBtn.textContent = 'Copiar Link';
-            copyBtn.classList.remove('copied');
-        }, 2000);
+        setTimeout(() => { copyBtn.textContent = 'Copiar Link'; copyBtn.classList.remove('copied'); }, 2000);
     });
 });
 
@@ -151,21 +143,39 @@ downloadBtn.addEventListener('click', () => {
     if (!canvas) return;
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/png');
-    link.download = `qrcode-${sanitizeForUtm(locationInput.value.trim() || 'campanha')}.png`;
+    
+    // Usa os dados do input atual ou do histórico recarregado para nomear o arquivo
+    const locationValue = document.getElementById('location').value.trim();
+    const campaignValue = document.getElementById('campaignName').value.trim();
+    const fileName = sanitizeForUtm(locationValue || campaignValue || 'qrcode');
+
+    link.download = `qrcode-${fileName}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 });
 
-// Ações do histórico
 historyList.addEventListener('click', (e) => {
     const target = e.target;
-    const index = target.dataset.index;
+    if (!target.dataset.index) return;
+    const index = parseInt(target.dataset.index, 10);
 
     if (target.classList.contains('delete')) {
         deleteFromHistory(index);
     } else if (target.classList.contains('view')) {
-        generateQRCode(history[index]);
+        const item = history[index];
+        // Preenche os campos para o usuário ver o que foi recarregado
+        destinationSelect.value = item.destination.startsWith('http') ? (['https://www.instagram.com/prefeiturapetrolina/','https://www.instagram.com/simaodurando/','https://petrolina.pe.gov.br/'].includes(item.destination) ? item.destination : 'manual') : '';
+        if (destinationSelect.value === 'manual') {
+            manualUrlInput.classList.remove('hidden');
+            manualUrlInput.value = item.destination;
+        } else {
+             manualUrlInput.classList.add('hidden');
+        }
+        locationInput.value = item.location;
+        campaignNameInput.value = item.campaign;
+        generateQRCode(item);
+        window.scrollTo(0, 0); // Rola a página para o topo para ver o resultado
     } else if (target.classList.contains('copy')) {
         const urlToCopy = buildTrackableUrl(history[index].destination, history[index].location, history[index].campaign);
         navigator.clipboard.writeText(urlToCopy);
@@ -174,5 +184,6 @@ historyList.addEventListener('click', (e) => {
     }
 });
 
-// Renderiza o histórico ao carregar a página
+clearHistoryBtn.addEventListener('click', clearAllHistory);
+
 document.addEventListener('DOMContentLoaded', renderHistory);
