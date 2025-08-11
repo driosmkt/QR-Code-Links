@@ -24,20 +24,22 @@
                 <button id="generateBtn">Gerar QR Code</button>
             </div>
 
-            <!-- A ÁREA DE RESULTADO QUE APARECE APÓS GERAR -->
+            <!-- ÁREA DE RESULTADO COM A ESTRUTURA REORDENADA -->
             <div id="resultBox" class="hidden">
                 <h3>Seu Link e QR Code Estão Prontos!</h3>
-                <div class="result-content">
-                    <div id="qrCodeCanvas"></div>
-                    <div class="result-details">
-                        <p><strong>Link Rastrável:</strong></p>
-                        <span id="generatedLink"></span>
-                        <div class="button-group">
-                            <button id="copyBtn" class="result-btn">Copiar Link</button>
-                            <button id="downloadBtn" class="result-btn primary">Baixar QR Code</button>
-                        </div>
+                
+                <!-- DETALHES E BOTÕES VÊM PRIMEIRO -->
+                <div class="result-details">
+                    <p><strong>Link Rastrável:</strong></p>
+                    <span id="generatedLink"></span>
+                    <div class="button-group">
+                        <button id="copyBtn" class="result-btn">Copiar Link</button>
+                        <button id="downloadBtn" class="result-btn primary">Baixar QR Code</button>
                     </div>
                 </div>
+
+                <!-- IMAGEM DO QR CODE VEM POR ÚLTIMO -->
+                <div id="qrCodeCanvas"></div>
             </div>
         </main>
     </div>
