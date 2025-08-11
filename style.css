@@ -122,11 +122,14 @@ button:hover {
     color: var(--dark-color);
 }
 
+/* --- AJUSTE DE CENTRALIZAÇÃO AQUI --- */
 #qrCodeCanvas {
     padding: 15px;
     background-color: white;
     border-radius: 8px;
-    display: inline-block;
+    display: inline-flex; /* Usa Flexbox para centralização perfeita */
+    justify-content: center;
+    align-items: center;
 }
 
 #qrCodeCanvas canvas {
@@ -135,7 +138,6 @@ button:hover {
     display: block;
 }
 
-/* --- ESTILOS DO HISTÓRICO --- */
 #historySection {
     margin-top: 3rem;
     border-top: 1px solid #444;
@@ -191,7 +193,6 @@ button:hover {
     background-color: var(--danger-color);
 }
 
-/* --- RODAPÉ --- */
 footer {
     text-align: center;
     padding: 2.5rem 0;
