@@ -64,6 +64,7 @@ button:hover {
     background-color: #ffda4a;
 }
 
+/* --- ESTILOS DA CAIXA DE RESULTADO ATUALIZADOS --- */
 #resultBox {
     background-color: var(--secondary-color);
     padding: 2rem;
@@ -76,31 +77,9 @@ button:hover {
     display: none;
 }
 
-.result-content {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 1.5rem;
-    text-align: left;
-}
-
-#qrCodeCanvas {
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-/* --- NOVA REGRA CSS ADICIONADA AQUI --- */
-/* Controla o tamanho de exibição do QR Code na tela, sem afetar a qualidade do download */
-#qrCodeCanvas canvas {
-    width: 200px !important;
-    height: 200px !important;
-}
-
-
 .result-details {
-    flex-grow: 1;
+    text-align: left; /* Alinha o texto dos detalhes à esquerda */
+    margin-bottom: 2rem; /* Espaço entre os detalhes e o QR Code */
 }
 
 #generatedLink {
@@ -143,6 +122,20 @@ button:hover {
     color: var(--dark-color);
 }
 
+#qrCodeCanvas {
+    padding: 15px; /* Aumenta a borda branca */
+    background-color: white;
+    border-radius: 8px;
+    display: inline-block; /* Permite centralização pelo text-align do pai */
+}
+
+#qrCodeCanvas canvas {
+    width: 250px !important; /* Aumenta um pouco a prévia na tela */
+    height: 250px !important;
+    display: block; /* Remove espaço extra abaixo da imagem */
+}
+
+/* --- RODAPÉ --- */
 footer {
     text-align: center;
     padding: 2.5rem 0;
@@ -173,10 +166,4 @@ footer {
     color: #888;
     font-size: 0.9rem;
     margin-top: 2rem;
-}
-
-@media (max-width: 600px) {
-    .result-content {
-        flex-direction: column;
-    }
-}
+}```
