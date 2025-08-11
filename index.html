@@ -12,6 +12,8 @@
 <body>
     <div class="container">
         <header>
+            <!-- LOGO DA PREFEITURA ADICIONADO AQUI -->
+            <img src="logo_prefs.png" alt="Logo Prefeitura de Petrolina" class="header-logo">
             <h1>QR-Code Links</h1>
             <p>Gere URLs rastreáveis e QR Codes para suas campanhas em pontos físicos.</p>
         </header>
@@ -44,12 +46,12 @@
                 <div id="qrCodeCanvas"></div>
             </div>
 
-            <!-- SEÇÃO DE HISTÓRICO -->
             <div id="historySection" class="hidden">
-                <h2>Histórico de Campanhas</h2>
-                <div id="historyList">
-                    <!-- Itens do histórico serão inseridos aqui -->
+                <div class="history-header">
+                    <h2>Histórico de Campanhas</h2>
+                    <button id="clearHistoryBtn" class="history-btn delete">Limpar Histórico</button>
                 </div>
+                <div id="historyList"></div>
             </div>
         </main>
     </div>
